@@ -1,0 +1,324 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9060" systemVersion="15C50" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="ScQ-Cj-gUp">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9051"/>
+        <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+    </dependencies>
+    <scenes>
+        <!--Avatar Collection View Controller-->
+        <scene sceneID="JJr-tv-YaW">
+            <objects>
+                <collectionViewController storyboardIdentifier="AvatarCollectionView" id="dKH-Ww-5rh" customClass="WSAvatarCollectionViewController" sceneMemberID="viewController">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="xbd-so-QUa">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <animations/>
+                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="5" minimumInteritemSpacing="5" id="aA9-S3-ea4">
+                            <size key="itemSize" width="50" height="50"/>
+                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                            <inset key="sectionInset" minX="10" minY="10" maxX="10" maxY="0.0"/>
+                        </collectionViewFlowLayout>
+                        <cells>
+                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="AvatarCell" id="jfw-qD-TJC">
+                                <rect key="frame" x="10" y="10" width="100" height="100"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                    <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <imageView userInteractionEnabled="NO" tag="100" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="0PF-mm-Y0T">
+                                            <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                                            <animations/>
+                                            <variation key="heightClass=regular-widthClass=compact" fixedFrame="YES">
+                                                <rect key="frame" x="8" y="8" width="84" height="84"/>
+                                            </variation>
+                                        </imageView>
+                                    </subviews>
+                                    <animations/>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                </view>
+                                <animations/>
+                                <size key="customSize" width="100" height="100"/>
+                                <variation key="default">
+                                    <mask key="subviews">
+                                        <exclude reference="0PF-mm-Y0T"/>
+                                    </mask>
+                                </variation>
+                                <variation key="heightClass=regular-widthClass=compact">
+                                    <mask key="subviews">
+                                        <include reference="0PF-mm-Y0T"/>
+                                    </mask>
+                                </variation>
+                            </collectionViewCell>
+                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="AvatarCell2" id="JS0-hA-Wvu">
+                                <rect key="frame" x="130" y="10" width="100" height="100"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                    <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <imageView userInteractionEnabled="NO" tag="100" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="KH0-Di-lhw">
+                                            <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                                            <animations/>
+                                            <variation key="heightClass=regular-widthClass=compact" fixedFrame="YES">
+                                                <rect key="frame" x="8" y="8" width="84" height="84"/>
+                                            </variation>
+                                        </imageView>
+                                    </subviews>
+                                    <animations/>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                </view>
+                                <animations/>
+                                <size key="customSize" width="100" height="100"/>
+                                <variation key="default">
+                                    <mask key="subviews">
+                                        <exclude reference="KH0-Di-lhw"/>
+                                    </mask>
+                                </variation>
+                                <variation key="heightClass=regular-widthClass=compact">
+                                    <mask key="subviews">
+                                        <include reference="KH0-Di-lhw"/>
+                                    </mask>
+                                </variation>
+                            </collectionViewCell>
+                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="AvatarCell3" id="dyf-wU-8KJ">
+                                <rect key="frame" x="250" y="10" width="100" height="100"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                    <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <imageView userInteractionEnabled="NO" tag="100" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ZB5-ew-CNl">
+                                            <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                                            <animations/>
+                                            <variation key="heightClass=regular-widthClass=compact" fixedFrame="YES">
+                                                <rect key="frame" x="8" y="8" width="84" height="84"/>
+                                            </variation>
+                                        </imageView>
+                                    </subviews>
+                                    <animations/>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                </view>
+                                <animations/>
+                                <size key="customSize" width="100" height="100"/>
+                                <variation key="default">
+                                    <mask key="subviews">
+                                        <exclude reference="ZB5-ew-CNl"/>
+                                    </mask>
+                                </variation>
+                                <variation key="heightClass=regular-widthClass=compact">
+                                    <mask key="subviews">
+                                        <include reference="ZB5-ew-CNl"/>
+                                    </mask>
+                                </variation>
+                            </collectionViewCell>
+                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="AvatarCell4" id="Gqg-mU-iJc">
+                                <rect key="frame" x="370" y="10" width="100" height="100"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                    <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <imageView userInteractionEnabled="NO" tag="100" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="9aZ-9i-v5l">
+                                            <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                                            <animations/>
+                                            <variation key="heightClass=regular-widthClass=compact" fixedFrame="YES">
+                                                <rect key="frame" x="8" y="8" width="84" height="84"/>
+                                            </variation>
+                                        </imageView>
+                                    </subviews>
+                                    <animations/>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                </view>
+                                <animations/>
+                                <size key="customSize" width="100" height="100"/>
+                                <variation key="default">
+                                    <mask key="subviews">
+                                        <exclude reference="9aZ-9i-v5l"/>
+                                    </mask>
+                                </variation>
+                                <variation key="heightClass=regular-widthClass=compact">
+                                    <mask key="subviews">
+                                        <include reference="9aZ-9i-v5l"/>
+                                    </mask>
+                                </variation>
+                            </collectionViewCell>
+                        </cells>
+                        <connections>
+                            <outlet property="dataSource" destination="dKH-Ww-5rh" id="e16-of-dTg"/>
+                            <outlet property="delegate" destination="dKH-Ww-5rh" id="unB-dL-z7B"/>
+                        </connections>
+                    </collectionView>
+                </collectionViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="TnV-bD-OT6" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1809" y="-1245"/>
+        </scene>
+        <!--FaceOff-->
+        <scene sceneID="CSo-B6-Agp">
+            <objects>
+                <tableViewController id="Yc5-6H-ZS7" customClass="WSMainViewController" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" id="Dxe-TY-wz7">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <animations/>
+                        <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="cell" textLabel="59H-TC-6Hf" style="IBUITableViewCellStyleDefault" id="TvP-3n-f1S">
+                                <rect key="frame" x="0.0" y="113.5" width="600" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="TvP-3n-f1S" id="8WR-sn-7fm">
+                                    <rect key="frame" x="0.0" y="0.0" width="567" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="cell" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="59H-TC-6Hf">
+                                            <rect key="frame" x="15" y="0.0" width="550" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <animations/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            <nil key="highlightedColor"/>
+                                            <variation key="heightClass=regular-widthClass=compact">
+                                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                            </variation>
+                                        </label>
+                                    </subviews>
+                                    <animations/>
+                                </tableViewCellContentView>
+                                <animations/>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="Yc5-6H-ZS7" id="yDH-A4-UXz"/>
+                            <outlet property="delegate" destination="Yc5-6H-ZS7" id="QJL-UM-BST"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="FaceOff" id="cEU-sJ-Kx3"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="lgH-yY-ahJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="262.5" y="-945"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="eHK-GT-CYU">
+            <objects>
+                <navigationController id="ScQ-Cj-gUp" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="gOd-me-EUH">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <animations/>
+                        <color key="barTintColor" red="0.24574488242907688" green="0.4549872394176725" blue="1" alpha="0.63120567375886527" colorSpace="calibratedRGB"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="Yc5-6H-ZS7" kind="relationship" relationship="rootViewController" id="Bdw-2S-tun"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="DqG-DD-YIx" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-667.5" y="-945"/>
+        </scene>
+        <!--Editor View Controller-->
+        <scene sceneID="WjT-7d-ujd">
+            <objects>
+                <viewController storyboardIdentifier="EditorView" autoresizesArchivedViewToFullSize="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="xFU-5l-580" customClass="WSEditorViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Wz8-cI-6ph"/>
+                        <viewControllerLayoutGuide type="bottom" id="PHW-LL-S2L"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="pfj-W8-5yt">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <animations/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="gMB-pu-Igu"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Hck-tu-AwS" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1117.5" y="-1245"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="26L-TG-Zdr">
+            <objects>
+                <viewController id="kel-h0-vma" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="YpJ-0M-IZi"/>
+                        <viewControllerLayoutGuide type="bottom" id="Deo-cQ-dl4"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Dd1-WN-bhP">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <animations/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="FmR-Eq-hCR" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1117.5" y="-527.25"/>
+        </scene>
+        <!--About View Controller-->
+        <scene sceneID="H0C-Vi-PDY">
+            <objects>
+                <viewController storyboardIdentifier="WSAboutViewController" id="0wu-H3-UYg" customClass="WSAboutViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="x2H-RX-MHx"/>
+                        <viewControllerLayoutGuide type="bottom" id="2Mt-Xv-c7E"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="C6J-tc-zTX">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yil-Ts-UZY">
+                                <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                                <animations/>
+                                <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="deviceRGB"/>
+                            </webView>
+                        </subviews>
+                        <animations/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="2Mt-Xv-c7E" firstAttribute="top" secondItem="yil-Ts-UZY" secondAttribute="bottom" id="12F-5O-tpc"/>
+                            <constraint firstItem="yil-Ts-UZY" firstAttribute="top" secondItem="C6J-tc-zTX" secondAttribute="topMargin" id="4Hp-g2-Lm8"/>
+                            <constraint firstItem="yil-Ts-UZY" firstAttribute="top" secondItem="C6J-tc-zTX" secondAttribute="topMargin" id="9bv-uh-IJ6"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="yil-Ts-UZY" secondAttribute="trailing" constant="-20" id="XAj-im-d57"/>
+                            <constraint firstItem="yil-Ts-UZY" firstAttribute="leading" secondItem="C6J-tc-zTX" secondAttribute="leadingMargin" constant="-20" id="kec-mj-GdV"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="subviews">
+                                <exclude reference="yil-Ts-UZY"/>
+                            </mask>
+                            <mask key="constraints">
+                                <exclude reference="12F-5O-tpc"/>
+                                <exclude reference="4Hp-g2-Lm8"/>
+                                <exclude reference="9bv-uh-IJ6"/>
+                                <exclude reference="XAj-im-d57"/>
+                                <exclude reference="kec-mj-GdV"/>
+                            </mask>
+                        </variation>
+                        <variation key="heightClass=regular-widthClass=compact">
+                            <mask key="subviews">
+                                <include reference="yil-Ts-UZY"/>
+                            </mask>
+                            <mask key="constraints">
+                                <include reference="12F-5O-tpc"/>
+                                <include reference="4Hp-g2-Lm8"/>
+                                <exclude reference="9bv-uh-IJ6"/>
+                                <include reference="XAj-im-d57"/>
+                                <include reference="kec-mj-GdV"/>
+                            </mask>
+                        </variation>
+                    </view>
+                    <connections>
+                        <outlet property="webView" destination="yil-Ts-UZY" id="qxa-3E-ba4"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="xqd-yZ-P5e" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="976.5" y="729.75"/>
+        </scene>
+    </scenes>
+</document>
