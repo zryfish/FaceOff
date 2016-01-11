@@ -7,4 +7,4 @@ FaceOff is an app for replacing avatars in WeChat session snapshot. It's my part
 - [MWPhotoBrowser](https://github.com/mwaterfall/MWPhotoBrowser)
 
 **Screenshots**
-![]()
+![screenshot](https://raw.githubusercontent.com/zryfish/FaceOff/master/FaceOff/toturial-1.png)
