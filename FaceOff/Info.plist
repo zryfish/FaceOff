@@ -26,7 +26,7 @@
 			<key>CFBundleURLSchemes</key>
 			<array>
 				<string>faceoff</string>
-				<string>wx38765146033eb513</string>
+				<string>wx3333</string><!-- replace with your own key -->
 				<string>tencent1105006004</string>
 				<string>tencent1105006004.content</string>
 				<string>QQ41C1685F</string>
