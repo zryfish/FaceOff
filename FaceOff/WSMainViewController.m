@@ -102,7 +102,7 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    NSLog(@"select row at %ld", indexPath.row);
+    NSLog(@"select row at %ld", (long)indexPath.row);
     if (indexPath.section == 0) {
         
         UIImagePickerController * imagePicker = [[UIImagePickerController alloc] init];

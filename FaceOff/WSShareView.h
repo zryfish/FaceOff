@@ -16,14 +16,13 @@
 #define CONTENT_WIDTH ([UIScreen mainScreen].bounds.size.width - 2 * MARGIN_LEFT)
 #define CONTENT_HEIGHT (self.frame.size.height - MARGIN_TOP - MARGIN_BOTTOM)
 
+
+
 #if DEBUG
 #define NSLog(FORMAT, ...) fprintf(stderr,"\nfunction:%s line:%d\n%s\n", __FUNCTION__, __LINE__, [[NSString stringWithFormat:FORMAT, ##__VA_ARGS__] UTF8String]);
 #else
 #define NSLog(FORMAT, ...) nil
 #endif
-
-
-#define UIColorFromRGB(rgbValue) [UIColor colorWithRed:((float)((rgbValue & 0xFF0000) >> 16))/255.0 green:((float)((rgbValue & 0xFF00) >> 8))/255.0 blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
 
 //DEBUG  模式下打印日志,当前行 并弹出一个警告
 #ifdef DEBUG

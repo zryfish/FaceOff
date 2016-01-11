@@ -15,15 +15,15 @@
 		<array>
 			<integer>30</integer>
 			<integer>192</integer>
-			<integer>130</integer>
-			<integer>1861</integer>
+			<integer>120</integer>
+			<real>1863</real>
 		</array>
 		<key>RightRectangle</key>
 		<array>
 			<integer>1088</integer>
 			<integer>192</integer>
-			<integer>130</integer>
-			<integer>1861</integer>
+			<integer>120</integer>
+			<real>1863</real>
 		</array>
 	</dict>
 	<key>iPhone7,2</key>
@@ -63,18 +63,18 @@
 		<array>
 			<integer>30</integer>
 			<integer>192</integer>
-			<integer>130</integer>
-			<integer>1861</integer>
+			<integer>120</integer>
+			<real>1863</real>
 		</array>
 		<key>RightRectangle</key>
 		<array>
 			<integer>1088</integer>
 			<integer>192</integer>
-			<integer>130</integer>
-			<integer>1861</integer>
+			<integer>120</integer>
+			<real>1863</real>
 		</array>
 	</dict>
-	<key>iPhone8.1</key>
+	<key>iPhone8,1</key>
 	<dict>
 		<key>TopRectangle</key>
 		<array>
@@ -323,7 +323,7 @@
 			<integer>1861</integer>
 		</array>
 	</dict>
-	<key>x86_64</key>
+	<key>x86_64_6</key>
 	<dict>
 		<key>TopRectangle</key>
 		<array>
@@ -347,7 +347,7 @@
 			<integer>1105</integer>
 		</array>
 	</dict>
-	<key>x86_64_5s</key>
+	<key>x86_64</key>
 	<dict>
 		<key>RightRectangle</key>
 		<array>

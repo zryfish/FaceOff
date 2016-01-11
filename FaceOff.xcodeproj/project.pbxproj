@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		372ADA9CFBF532F7488D1E5E /* libPods-FaceOff.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 06FAA1A55EFBEFA739ACC028 /* libPods-FaceOff.a */; };
+		5B06EE631C26993400927673 /* toturial-4.png in Resources */ = {isa = PBXBuildFile; fileRef = 5B06EE621C26993400927673 /* toturial-4.png */; };
 		5B1D1B2D1C0DE70800914178 /* WSView.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 5B1D1B1A1C0DE70700914178 /* WSView.bundle */; };
 		5B1D1B2E1C0DE70800914178 /* WSMenuItemCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5B1D1B231C0DE70700914178 /* WSMenuItemCell.xib */; };
 		5B1D1B2F1C0DE70800914178 /* WSAvatar.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B1D1B241C0DE70700914178 /* WSAvatar.m */; };
@@ -62,6 +63,8 @@
 
 /* Begin PBXFileReference section */
 		06FAA1A55EFBEFA739ACC028 /* libPods-FaceOff.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-FaceOff.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		5B06EE611C25024900927673 /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
+		5B06EE621C26993400927673 /* toturial-4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "toturial-4.png"; sourceTree = "<group>"; };
 		5B1D1B1A1C0DE70700914178 /* WSView.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = WSView.bundle; sourceTree = "<group>"; };
 		5B1D1B1B1C0DE70700914178 /* WSAvatar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WSAvatar.h; sourceTree = "<group>"; };
 		5B1D1B1C1C0DE70700914178 /* WSAvatarManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WSAvatarManager.h; sourceTree = "<group>"; };
@@ -173,6 +176,7 @@
 		5B27A55A1C08AD67001779F1 = {
 			isa = PBXGroup;
 			children = (
+				5B06EE611C25024900927673 /* PrefixHeader.pch */,
 				5B27A5651C08AD67001779F1 /* FaceOff */,
 				5B27A5641C08AD67001779F1 /* Products */,
 				4015818B31B6326D447848E7 /* Pods */,
@@ -252,6 +256,7 @@
 		5B27A5661C08AD67001779F1 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				5B06EE621C26993400927673 /* toturial-4.png */,
 				5B46926A1C1B306C00006380 /* toturial-1.png */,
 				5B46926B1C1B306C00006380 /* toturial-2.png */,
 				5B46926C1C1B306C00006380 /* toturial-3.png */,
@@ -382,6 +387,7 @@
 				5B1D1B3E1C0DE8BE00914178 /* 1.jpeg in Resources */,
 				5B1D1B2D1C0DE70800914178 /* WSView.bundle in Resources */,
 				5B4692681C19E23700006380 /* About.html in Resources */,
+				5B06EE631C26993400927673 /* toturial-4.png in Resources */,
 				5B1D1B431C0DE8BE00914178 /* 1111.jpeg in Resources */,
 				5B46926F1C1B306C00006380 /* toturial-3.png in Resources */,
 				5B27A5711C08AD67001779F1 /* Main.storyboard in Resources */,
@@ -589,21 +595,20 @@
 			baseConfigurationReference = CD7DB50A31F05EC211B81E81 /* Pods-FaceOff.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Zhang Renyu (YUE9AF33P7)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Zhang Renyu (YUE9AF33P7)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = PrefixHeader.pch;
 				HEADER_SEARCH_PATHS = "${inherited}";
 				INFOPLIST_FILE = FaceOff/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/FaceOff/UMSocial_Sdk_4.4",
-				);
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				OTHER_LDFLAGS = (
 					"-Objc",
 					"$(inherited)",
@@ -619,21 +624,20 @@
 			baseConfigurationReference = E2D2879E9A0C6AD484924F55 /* Pods-FaceOff.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Zhang Renyu (YUE9AF33P7)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Zhang Renyu (YUE9AF33P7)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = PrefixHeader.pch;
 				HEADER_SEARCH_PATHS = "${inherited}";
 				INFOPLIST_FILE = FaceOff/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/FaceOff/UMSocial_Sdk_4.4",
-				);
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				OTHER_LDFLAGS = (
 					"-Objc",
 					"$(inherited)",

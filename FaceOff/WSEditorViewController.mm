@@ -18,7 +18,6 @@
 #import "AvatarReplacor.h"
 #import <opencv2/opencv.hpp>
 #import "UIImage+OpenCV.h"
-//#import "ImageUitls.h"
 
 typedef NS_ENUM(NSInteger, ViewPosition) {
     PositionLeft = 1 << 0,
@@ -47,7 +46,7 @@ typedef NS_ENUM(NSInteger, ViewPosition) {
 
 @property (nonatomic, assign) AvatarReplacor* ap;
 @property (nonatomic) BOOL isTitleReplaced;
-
+@property (nonatomic) int selectedAvatar;
 
 @end
 
@@ -58,41 +57,25 @@ const static CGFloat SideRegionWidth = 120.0f;
 
 
 - (void)touchesEnded:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
-    
-    if (self.currentPosition == PositionShare || self.currentPosition == PositionCrop) {
-        return;
-    }
     UITouch * touch = [touches anyObject];
-    CGPoint touchPoint = [touch locationInView:self.canvas];
+    CGPoint touchPoint = [touch locationInView:self.imageView];
+    
     ViewPosition touchPosition = [self touchPosition:touchPoint];
     
-    NSString * position = @"Center";
-    switch (touchPosition) {
-        case PositionCenter:
-            position = @"Center";
-            break;
-        case PositionLeft:
-            position = @"Left";
-            break;
-        case PositionRight:
-            position = @"Right";
-            break;
-            
-        default:
-            break;
+    if (touchPosition == PositionLeft) {
+        NSLog(@"select left avatar %d \n", self.ap->containsPointInLeft(touchPoint.x, touchPoint.y));
+        self.selectedAvatar = self.ap->containsPointInLeft(touchPoint.x, touchPoint.y);
+    } else if (touchPosition == PositionRight) {
+        NSLog(@"select right avatar %d \n", self.ap->containsPointInRight(touchPoint.x, touchPoint.y));
+        self.selectedAvatar = self.ap->containsPointInRight(touchPoint.x, touchPoint.y);
     }
-    NSLog(@"touched on %@", position );
-    
-    [self moveCanvas:touchPosition];
 }
 
 - (ViewPosition)touchPosition:(CGPoint)touchPoint {
-    //ViewPosition position = PositionCenter;
-    
-    if (touchPoint.x < SidePadding + SideRegionWidth && touchPoint.x > SidePadding) {
+    if (touchPoint.x <  SideRegionWidth && touchPoint.x > 0) {
         return PositionLeft;
-    } else if (touchPoint.x < self.canvas.frame.size.width - SidePadding &&
-               touchPoint.x > self.canvas.frame.size.width - SidePadding - SideRegionWidth) {
+    } else if (touchPoint.x < self.imageView.frame.size.width &&
+               touchPoint.x > self.imageView.frame.size.width - SideRegionWidth) {
         return PositionRight;
     } else {
         return PositionCenter;
@@ -113,14 +96,72 @@ const static CGFloat SideRegionWidth = 120.0f;
     [self.canvas addSubview:self.imageView];
     self.canvas.backgroundColor = [UIColor blackColor];
     
-    
     self.currentMenu = nil;
     self.avatarManager = [[WSAvatarManager alloc] init];
     self.currentPosition = PositionCenter;
     
-    //self.ap = AvatarReplacor();
     [self initializeReplacor];
     self.isTitleReplaced = NO;
+    self.selectedAvatar = -1;
+    
+    UISwipeGestureRecognizer * swipeLeft = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipe:)];
+    UISwipeGestureRecognizer * swipeRight = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipe:)];
+    
+    [swipeLeft setDirection:UISwipeGestureRecognizerDirectionLeft];
+    [swipeRight setDirection:UISwipeGestureRecognizerDirectionRight];
+    
+    [self.imageView addGestureRecognizer:swipeRight];
+    [self.imageView addGestureRecognizer:swipeLeft];
+    
+    self.imageView.userInteractionEnabled = YES;
+    
+    UITapGestureRecognizer * doubleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleDoubleTap:)];
+    [doubleTap setNumberOfTapsRequired:2];
+    [doubleTap setNumberOfTouchesRequired:1];
+    [self.canvas addGestureRecognizer:doubleTap];
+}
+
+- (void)handleSwipe:(UISwipeGestureRecognizer *)swipe {
+    if (swipe.direction == UISwipeGestureRecognizerDirectionLeft) {
+        NSLog(@"Left Swipe");
+        if (self.currentPosition == PositionCenter) {
+            [self moveCanvas:PositionRight];
+        } else if (self.currentPosition == PositionLeft) {
+            [self moveCanvas:PositionCenter];
+        }
+    }
+    
+    if (swipe.direction == UISwipeGestureRecognizerDirectionRight) {
+        NSLog(@"Right Swipe");
+        if (self.currentPosition == PositionCenter) {
+            [self moveCanvas:PositionLeft];
+        } else if (self.currentPosition == PositionRight) {
+            [self moveCanvas:PositionCenter];
+        }
+    }
+}
+
+- (void)handleDoubleTap:(UITapGestureRecognizer *)tap {
+    if (tap.state == UIGestureRecognizerStateEnded && self.currentMenu) {
+        CGPoint point = [tap locationInView:self.currentMenu];
+        NSIndexPath * indexPath = [self.currentMenu indexPathForItemAtPoint:point];
+        if (indexPath) {
+            NSLog(@"item %ld was double taped", (long)indexPath.row);
+            self.currentAvatar = self.avatarManager.avatars[indexPath.row];
+            
+            NSLog(@"select avatar %@ \n", self.currentAvatar.imageName);
+            
+            Mat avatar = [[UIImage imageNamed:self.currentAvatar.imageName] CVMat];
+            if (self.currentPosition == PositionLeft) {
+                self.ap->replaceAvatar(avatar, SIDE_LEFT);
+            } else if (self.currentPosition == PositionRight) {
+                self.ap->replaceAvatar(avatar, SIDE_RIGHT);
+            }
+            self.imageView.image = [UIImage imageWithCVMat:self.ap->getResultImage()];
+        } else {
+            NSLog(@"nothing happened");
+        }
+    }
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -141,7 +182,6 @@ const static CGFloat SideRegionWidth = 120.0f;
     [super viewDidAppear:animated];
     [self setupEditorToolbar];
     [[UIApplication sharedApplication] setStatusBarHidden:YES];
-    
 }
 
 - (void)dealloc {
@@ -166,17 +206,15 @@ const static CGFloat SideRegionWidth = 120.0f;
     self.ap->setAvatarMinSize(conf.minAvatarSize.width, conf.minAvatarSize.height);
     self.ap->setAvatarMaxSize(conf.maxAvatarSize.width, conf.maxAvatarSize.height);
     self.ap->setFontSize((int)conf.fontSize);
+    self.ap->setScreenScale(conf.scale);
     self.ap->finishInitialization();
 }
 
 - (void)setupEditorToolbar {
     UIBarButtonItem * flexibleSpace = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:self action:nil];
     UIBarButtonItem * discardButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemTrash target:self action:@selector(discardChange:)];
-    //discardButton.tintColor = [UIColor whiteColor];
     UIBarButtonItem * editButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(replaceAvatar:)];
     UIBarButtonItem * shareButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:self action:@selector(share:)];
-    //UIBarButtonItem * cropButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:self action:@selector(crop:)];
-    //UIBarButtonItem * saveButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSave target:self action:@selector(save:)];
     NSArray * items = [NSArray arrayWithObjects:discardButton, flexibleSpace, editButton, flexibleSpace, shareButton, nil];
     for (UIBarButtonItem * item in items)
     {
@@ -185,7 +223,6 @@ const static CGFloat SideRegionWidth = 120.0f;
     NSLog(@"view frame %f %f %f %f\n", self.view.frame.origin.x, self.view.frame.origin.y, self.view.frame.size.width, self.view.frame.size.height);
     self.toolbar = [[UIToolbar alloc] initWithFrame:CGRectMake(0, self.view.frame.size.height - 44, self.view.frame.size.width, 44)];
     [self.toolbar setItems:items];
-    //self.navigationController.toolbar = self.toolbar;
     self.toolbar.barTintColor = [UIColor colorWithRed:0.0f green:0.0f blue:0.8f alpha:1.0f];
     self.toolbar.backgroundColor = [UIColor colorWithRed:0.0f green:0.0f blue:0.0f alpha:0.0f];
     [self.view addSubview:self.toolbar];
@@ -214,19 +251,20 @@ const static CGFloat SideRegionWidth = 120.0f;
 
 #pragma mark - UICollectionView delegate methods
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-    self.currentAvatar = self.avatarManager.avatars[indexPath.row];
-    
-    NSLog(@"select avatar %@ \n", self.currentAvatar.imageName);
-    
-    Mat avatar = [[UIImage imageNamed:self.currentAvatar.imageName] CVMat];
-    //UIImageToMat([UIImage imageNamed:self.currentAvatar.imageName], avatar);
-    if (self.currentPosition == PositionLeft) {
-        self.ap->replaceAvatar(avatar, SIDE_LEFT);
-    } else if (self.currentPosition == PositionRight) {
-        self.ap->replaceAvatar(avatar, SIDE_RIGHT);
+    if (self.selectedAvatar == -1) {
+        NSLog(@"no avatar was selected");
+    } else {
+        SIDE whichSide = SIDE_LEFT;
+        if (self.currentPosition == PositionLeft) {
+            whichSide = SIDE_LEFT;
+        } else if (self.currentPosition == PositionRight) {
+            whichSide = SIDE_RIGHT;
+        }
+        self.currentAvatar = self.avatarManager.avatars[indexPath.row];
+        Mat avatar = [[UIImage imageNamed:self.currentAvatar.imageName] CVMat];
+        self.ap->replaceAvatar(avatar, whichSide, self.selectedAvatar);
+        self.imageView.image = [UIImage imageWithCVMat:self.ap->getResultImage()];
     }
-    //self.imageView.image = MatToUIImage(self.ap->getResultImage());
-    self.imageView.image = [UIImage imageWithCVMat:self.ap->getResultImage()];
 }
 
 
@@ -279,6 +317,7 @@ const static CGFloat SideRegionWidth = 120.0f;
     }
     
     self.currentPosition = position;
+    self.selectedAvatar = -1;
 }
 
 - (void)configureScrollMenu:(ViewPosition)position {
@@ -306,7 +345,6 @@ const static CGFloat SideRegionWidth = 120.0f;
     [self.currentMenu registerClass:[WSMenuItemCell class] forSupplementaryViewOfKind:@"title" withReuseIdentifier:@"WSMenuItemTitleView"];
     
     self.currentMenu.backgroundColor = [UIColor colorWithRed:0.9f green:0.9f blue:0.9f alpha:1.0f];
-    //self.currentMenu.backgroundColor = [UIColor ];
     self.currentMenu.delegate = self;
     self.currentMenu.dataSource = self;
 }
@@ -347,8 +385,6 @@ const static CGFloat SideRegionWidth = 120.0f;
     self.isTitleReplaced = !self.isTitleReplaced;
     self.ap->replaceTitle(self.isTitleReplaced ? true : false);
     self.imageView.image = [UIImage imageWithCVMat:self.ap->getResultImage()];
-    //self.imageView.image = [ImageUitls drawText:@"@FaceOff" onImage:self.imageView.image atPoint:CGPointMake(260, 76)];
-    //MatToUIImage(self.ap->getResultImage());
 }
 
 - (IBAction)share:(id)sender {
@@ -362,7 +398,6 @@ const static CGFloat SideRegionWidth = 120.0f;
             rotationAndPerspectiveTransform.m34 = 1.0 / 300;
             layer.shadowOpacity = 0.01;
             layer.transform = CATransform3DRotate(rotationAndPerspectiveTransform, -10.0f * M_PI / 180.0f, 1.0f, 0.0f, 0.0f);
-            //self.imageView.alpha = 0.35;
         }completion:^(BOOL finished) {
             NSLog(@"");
             [UIView animateWithDuration:0.2 animations:^{
@@ -385,8 +420,6 @@ const static CGFloat SideRegionWidth = 120.0f;
             rotationAndPerspectiveTransform.m34 = 1.0 / -300;
             layer.shadowOpacity = 0.01;
             layer.transform = CATransform3DRotate(rotationAndPerspectiveTransform, 10.0f * M_PI / 180.0f, 1.0f, 1.0f, 0.0f);
-            //self.imageView.alpha = 0.5;
-            
             
         } completion:^(BOOL finished){
             [UIView animateWithDuration:0.2 animations:^{
@@ -400,33 +433,6 @@ const static CGFloat SideRegionWidth = 120.0f;
     }
 }
 
-- (IBAction)crop:(id)sender {
-    NSLog(@"Crop");
-    
-    WSCropView * previousView = self.cropView;
-    if (!self.cropView) {
-        
-        //self.canvas.autoresizesSubviews = YES;
-        CGFloat xDiff = self.imageView.frame.size.width - (self.imageView.frame.size.height
-                                                           - self.toolbar.frame.size.height ) / self.imageView.frame.size.height * self.imageView.frame.size.width;
-        self.imageView.frame = CGRectMake(SidePadding + xDiff / 2.0f, 0, self.imageView.frame.size.width - xDiff, self.imageView.frame.size.height - self.toolbar.frame.size.height);
-        self.cropView = [[WSCropView alloc] initWithFrame:self.imageView.bounds];
-        [self.imageView addSubview:self.cropView];
-        self.imageView.userInteractionEnabled = YES;
-    } else {
-        CGRect resultRect = self.cropView.cropRect;
-        self.cropView = nil;
-        
-        self.imageView.frame = CGRectMake(SidePadding, 0, self.view.frame.size.width, self.view.frame.size.height);
-        
-        self.imageView.userInteractionEnabled = NO;
-    }
-    
-    if (previousView) {
-        [previousView removeFromSuperview];
-    }
-}
-
 - (IBAction)save:(id)sender {
     NSLog(@"Save");
     UIImageWriteToSavedPhotosAlbum(self.imageView.image, nil, nil, nil);
@@ -435,7 +441,6 @@ const static CGFloat SideRegionWidth = 120.0f;
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 - (void)setImage:(UIImage *)image {

@@ -19,6 +19,7 @@
 @property (nonatomic, readwrite) CGSize minAvatarSize;
 @property (nonatomic, readwrite) CGSize maxAvatarSize;
 @property (nonatomic, readwrite) NSInteger fontSize;
+@property (nonatomic, readwrite) CGFloat scale;
 
 @end
 
@@ -62,6 +63,7 @@
         }
         
         NSLog(@"Machine Type is %@", self.machineType);
+        self.machineType = @"iPhone7,1";
         
         NSDictionary * typeData = (NSDictionary *)[temp objectForKey:self.machineType];
         
@@ -73,6 +75,8 @@
         self.topRect = [self rectWithArray:[typeData objectForKey:@"TopRectangle"]];
         self.backgroundColorThresh = [[temp objectForKey:@"BackgroundThreshold"] integerValue];
         self.fontSize = 1;
+        self.scale = [UIScreen mainScreen].scale;
+        
         NSArray * minAvatarArray = [temp objectForKey:@"MinAvatarSize"];
         NSArray * maxAvatarArray = [temp objectForKey:@"MaxAvatarSize"];
         if ([self.machineType isEqualToString:@"iPhone8,2"]
@@ -83,6 +87,7 @@
         }
         self.minAvatarSize = CGSizeMake( [minAvatarArray[0] floatValue], [minAvatarArray[1] floatValue]);
         self.maxAvatarSize = CGSizeMake( [maxAvatarArray[0] floatValue], [maxAvatarArray[1] floatValue]);
+        
     }
     
     return self;

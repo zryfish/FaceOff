@@ -19,6 +19,7 @@
 @property (nonatomic, readonly) CGSize minAvatarSize;
 @property (nonatomic, readonly) CGSize maxAvatarSize;
 @property (nonatomic, readonly) NSInteger fontSize;
+@property (nonatomic, readonly) CGFloat scale;
 
 +(id)sharedConfiguration;
 

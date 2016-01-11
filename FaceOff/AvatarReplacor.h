@@ -33,17 +33,20 @@ public:
     void setBackgroundColorThresh(int thresh);
     void setImage(cv::Mat & image);
     void setFontSize(int size);
+    void setScreenScale(float scale);
     void finishInitialization();
     
     void replaceAvatar(const Mat & avatar, SIDE side);
+    void replaceAvatar(const Mat & avatar, SIDE side, int index);
     //static Mat replaceAvatar(Mat & image, const std::vector<cv::Rect> rects, const Mat & avatar, int minWidth, int maxHeight);
     void replaceTitle(bool replace);
     
     Mat getResultImage();
     
-    
     bool isModified(const cv::Mat);
-    
+    int containsPointInLeft(double x, double y);
+    int containsPointInRight(double x, double y);
+
 private:
     Mat image;
     Mat resultImage;
@@ -58,6 +61,7 @@ private:
     bool isDetectionFinished;
     bool isInitialized;
     int fontSize;
+    float screenScale;
 };
 
 #endif /* AvatarReplacor_hpp */

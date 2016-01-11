@@ -65,6 +65,42 @@ void AvatarReplacor::setImage(cv::Mat & im) {
     }
 }
 
+void AvatarReplacor::replaceAvatar(const cv::Mat &avatar, SIDE side, int index) {
+    vector<cv::Rect> rects;
+    cv::Rect rect;
+    if (side == SIDE_LEFT) {
+        rects = leftRects;
+        rect = leftRegion;
+    } else if (side == SIDE_RIGHT){
+        rects = rightRects;
+        rect = rightRegion;
+    } else {
+        return;
+    }
+    if (index < 0 || index >= rects.size()) {
+        return;
+    }
+    
+    if (rects[index].height <= avatarMaxSize.height && rects[index].height >= avatarMinSize.height
+        && rects[index].width >= avatarMinSize.width && rects[index].width <= avatarMaxSize.width) {
+        
+        Mat temp;
+        
+        resize(avatar, temp, avatarMaxSize);
+        
+        if (rects[index].tl().y < 10) {
+            temp = temp(cv::Rect(0, avatarMaxSize.height - rects[index].height, avatarMaxSize.width, rects[index].height));
+        } else {
+            temp = temp(cv::Rect(0, 0, avatarMaxSize.width, rects[index].height));
+        }
+        
+        cv::Rect tempRect(cv::Point(rects[index].tl().x + rect.tl().x, rects[index].tl().y + rect.tl().y),
+                          cv::Size(avatarMaxSize.width, rects[index].height));
+        temp.copyTo(resultImage(tempRect));
+    }
+    
+}
+
 void AvatarReplacor::replaceAvatar(const cv::Mat &avatar, SIDE side) {
     
     Mat roi;
@@ -113,6 +149,10 @@ void AvatarReplacor::setFontSize(int size) {
     fontSize = size;
 }
 
+void AvatarReplacor::setScreenScale(float scale) {
+    screenScale = scale;
+}
+
 void AvatarReplacor::replaceTitle(bool replace) {
     //Mat roi = Mat::zeros(topRegion.height, topRegion.width, CV_8UC4);
     if (replace) {
@@ -144,4 +184,36 @@ bool AvatarReplacor::isModified(const cv::Mat im) {
 
 Mat AvatarReplacor::getResultImage() {
     return resultImage;
+}
+
+int AvatarReplacor::containsPointInLeft(double x, double y) {
+    if (leftRects.size() == 0) {
+        return -1;
+    } else {
+        x *= screenScale;
+        y *= screenScale;
+        for (int i = 0; i < leftRects.size(); i++) {
+            if (leftRects[i].contains(Point(x - leftRegion.tl().x, y - leftRegion.tl().y))) {
+                return i;
+            }
+        }
+    }
+    
+    return -1;
+}
+
+int AvatarReplacor::containsPointInRight(double x, double y) {
+    if (rightRects.size() == 0) {
+        return -1;
+    } else {
+        x *= screenScale;
+        y *= screenScale;
+        for (int i = 0; i < rightRects.size(); i++) {
+            if (rightRects[i].contains(Point(x - rightRegion.tl().x, y - rightRegion.tl().y))) {
+                return i;
+            }
+        }
+    }
+    
+    return -1;
 }
