@@ -1,5 +1,7 @@
 ##FaceOff##
-FaceOff is an app for replacing avatars in WeChat session snapshot. It's my part-time work to practice iOS programming. Not a fancy app you usually get to see.
+FaceOff is an app for replacing avatars in WeChat session snapshot. It's my part-time work to practice iOS programming. Not a fancy app you usually get to see. And it's downloadable in [AppStore](https://appsto.re/cn/_zfM_.i).
+
+
 
 ##Reference Projects##
 - [openshare](https://github.com/100apps/openshare)
